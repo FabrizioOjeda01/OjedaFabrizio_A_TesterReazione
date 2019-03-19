@@ -1,48 +1,48 @@
-#include <LiquidCrystal_I2C.h>
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+              // Librerie
+ #include <LiquidCrystal_I2C.h>
+ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-              // variabili input
-int btn_Inizio;
-int btn_Led;
-int btn_Suono;
+              // variabili INPUT
+ int btn_Inizio;
+ int    btn_Led;
+ int  btn_Suono;
               // variabili OUTPUT
-int led_Inizio;
-int led_Verde;
-int led_Rosso;
-int suono;
+ int led_Inizio;
+ int  led_Verde;
+ int  led_Rosso;
+ int      suono;
              //  variabili 
-int esito1;
-int esito2;
-int test1;
-int test2;
+ int esito1;
+ int esito2;
+ int   test;
 
-void setup() {
-lcd.init();
-lcd.backlight();
 
-pinMode(btn_Inizio , INPUT);
-pinMode(btn_Led,     INPUT);
-pinMode(btn_Suono ,  INPUT);
+ void setup() {
+  lcd.init();
+  lcd.backlight();
 
-pinMode(led_Inizio,  OUTPUT);
-pinMode(led_Verde,   OUTPUT);
-pinMode(led_Rosso,   OUTPUT);
-pinMode(suono,       OUTPUT);
+  pinMode(btn_Inizio , INPUT);
+  pinMode(btn_Led,     INPUT);
+  pinMode(btn_Suono ,  INPUT);
 
-btn_Inizio  = 1;
-btn_Led     = 2;
-btn_Suono   = 3;
+  pinMode(led_Inizio,  OUTPUT);
+  pinMode(led_Verde,   OUTPUT);
+  pinMode(led_Rosso,   OUTPUT);
+  pinMode(suono,       OUTPUT);
 
-led_Inizio  = 8;
-led_Verde   = 9;
-led_Rosso   = 10;
-suono       = 11;
+  btn_Inizio  = 1;
+  btn_Led     = 2;
+  btn_Suono   = 3;
 
-test1       = 750;
-test2       = 750;
+  led_Inizio  = 8;
+  led_Verde   = 9;
+  led_Rosso   = 10;
+  suono       = 11;
+
+  test        = 750;
 }
 
-void loop() {
+ void loop() {
   //Finché non verrà rilevata la pressione del bottone di inizio, non inizierà nulla
   while(digitalRead(btn_Inizio) == LOW){};
   digitalWrite (led_Verde, LOW);
@@ -60,3 +60,17 @@ void loop() {
   digitalWrite (led_Rosso, HIGH);
   }
 }
+
+  int calcoloTempo(int pin, int bottone, int linCursore, String risultato){
+    delay(random(1000, 8000));
+    digitalWrite(pin, HIGH);
+    int ris = 0;
+    while (digitalRead(button) == LOW){
+      ris++;
+      delay(1);
+    }
+    lcd.setCursor(0, linCursore);
+    lcd.print(risultato + String(ris) + "ms");
+    digitalWrite(pin, LOW);
+    return ris;
+  }
