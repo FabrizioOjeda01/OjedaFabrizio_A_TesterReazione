@@ -53,7 +53,7 @@
   esito2 = calcoloTempo(suono, btn_Suono, 1, " ");
    
   //Esito finale, led verde = test superato, led rosso = test non superato
-  if(esito1 <= test1 && esito2 <= test2){
+  if(esito1 <= test && esito2 <= test){
     digitalWrite (led_Verde, HIGH);
   }else{
     digitalWrite (led_Rosso, HIGH);
@@ -64,7 +64,7 @@
     delay(random(1000, 8000));         // Dopo un tempo random che va da 1 secondo a 8 secondi il led/buzzer si accenderà
     digitalWrite(pin, HIGH);
     int ris = 0;
-    while (digitalRead(button) == LOW){ // Il while è per determinare il tempo (in millisecondi) di reazione nel premere il bottone
+    while (digitalRead(bottone) == LOW){ // Il while è per determinare il tempo (in millisecondi) di reazione nel premere il bottone
       ris++;
       delay(1);
     }
