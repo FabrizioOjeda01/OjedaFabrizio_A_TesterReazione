@@ -28,9 +28,9 @@
   pinMode(led_Rosso,   OUTPUT);
   pinMode(suono,       OUTPUT);
 
-  btn_Inizio  = 1;
-  btn_Led     = 2;
-  btn_Suono   = 3;
+  btn_Inizio  = 2;
+  btn_Led     = 3;
+  btn_Suono   = 4;
 
   led_Bianco  = 8;
   led_Verde   = 9;
