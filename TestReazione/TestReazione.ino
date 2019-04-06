@@ -6,7 +6,7 @@
  int    btn_Led;
  int  btn_Suono;
               // variabili OUTPUT
- int led_Bianco;
+ int led_Blu;
  int  led_Verde;
  int  led_Rosso;
  int      suono;
@@ -19,23 +19,24 @@
   lcd.init();
   lcd.backlight();
 
-  pinMode(btn_Inizio , INPUT);
-  pinMode(btn_Led,     INPUT);
-  pinMode(btn_Suono ,  INPUT);
-
-  pinMode(led_Bianco,  OUTPUT);
-  pinMode(led_Verde,   OUTPUT);
-  pinMode(led_Rosso,   OUTPUT);
-  pinMode(suono,       OUTPUT);
-
   btn_Inizio  = 2;
   btn_Led     = 3;
   btn_Suono   = 4;
 
-  led_Bianco  = 8;
+  led_Blu  = 8;
   led_Verde   = 9;
   led_Rosso   = 10;
   suono       = 11;
+
+  
+  pinMode(btn_Inizio , INPUT);
+  pinMode(btn_Led,     INPUT);
+  pinMode(btn_Suono ,  INPUT);
+
+  pinMode(led_Blu,  OUTPUT);
+  pinMode(led_Verde,   OUTPUT);
+  pinMode(led_Rosso,   OUTPUT);
+  pinMode(suono,       OUTPUT);
 
   test        = 750;
 }
@@ -49,8 +50,8 @@
   lcd.clear();
 
   //Richiamo del metodo per il calcolo del tempo di reazione impiegato sia per il led che per il buzzer
-  esito1 = calcoloTempo(led_Bianco, btn_Led, 0, " ");
-  esito2 = calcoloTempo(suono, btn_Suono, 1, " ");
+  esito1 = calcoloTempo(led_Blu, btn_Led, 0, "Led: ");
+  esito2 = calcoloTempo(suono, btn_Suono, 1, "Suono: ");
    
   //Esito finale, led verde = test superato, led rosso = test non superato
   if(esito1 <= test && esito2 <= test){
@@ -60,7 +61,7 @@
   }
 }
   
-  int calcoloTempo(int pin, int bottone, int linCursore, String risultato){
+  int calcoloTempo(int pin, int bottone, int linCursore, String spazio){
     delay(random(1000, 8000));         // Dopo un tempo random che va da 1 secondo a 8 secondi il led/buzzer si accenderà
     digitalWrite(pin, HIGH);
     int ris = 0;
@@ -69,7 +70,7 @@
       delay(1);
     }
     lcd.setCursor(0, linCursore);       // Verrà poi stampato il risultato sull'LCD, linea 0 del cursore per led, linea 1 del cursore per il buzzer
-    lcd.print(risultato + String(ris) + "ms");
+    lcd.print(spazio + String(ris) + "ms");
     digitalWrite(pin, LOW);             // Verrà poi spento il led
     return ris;
   }
