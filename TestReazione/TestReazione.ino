@@ -44,10 +44,12 @@
  void loop() {
   
   //Finché non verrà rilevata la pressione del bottone di inizio, non inizierà nulla
+  delay(400);
   while(digitalRead(btn_Inizio) == LOW){};
+  lcd.clear();
+  lcd.print("Test inziato");
   digitalWrite (led_Verde, LOW);
   digitalWrite (led_Rosso, LOW);
-  lcd.clear();
 
   //Richiamo del metodo per il calcolo del tempo di reazione impiegato sia per il led che per il buzzer
   esito1 = calcoloTempo(led_Blu, btn_Led, 0, "Led: ");
@@ -59,6 +61,13 @@
   }else{
     digitalWrite (led_Rosso, HIGH);
   }
+  
+  while(digitalRead(btn_Inizio) == LOW){};
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Premere per");
+  lcd.setCursor(0, 1);
+  lcd.print("inziare");
 }
   
   int calcoloTempo(int pin, int bottone, int linCursore, String spazio){
@@ -70,7 +79,7 @@
       delay(1);
     }
     lcd.setCursor(0, linCursore);       // Verrà poi stampato il risultato sull'LCD, linea 0 del cursore per led, linea 1 del cursore per il buzzer
-    lcd.print(spazio + String(ris) + "ms");
+    lcd.print(spazio + String(ris) + "ms       ");
     digitalWrite(pin, LOW);             // Verrà poi spento il led
     return ris;
   }
